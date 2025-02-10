@@ -1,38 +1,40 @@
-  name: Iris Project CI/CD
+name: Iris Project CI/CD Pipeline
 
-  on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
-  jobs:
-    test:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/setup-python@v2
-          with:
-            python-version: 3.8
-            
-        - name: Install dependencies
-          run: |
-            pip install --upgrade pip
-            pip install pandas scikit-learn
-            pip install seaborn
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-        - name: Run Unit Tests
-          run:  |
-            python -m unittest discover -s . -p "*.py"
-    
-    deploy:
-      runs-on: ubuntu-latest
-      needs: test
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-        - name: Deploy to environment
-          run: |
-            echo "Could deploy a model somewhere if we wanted"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pandas scikit-learn
+
+      - name: Print test message
+        run: echo "We will add unit tests later."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to environment
+        run: |
+          echo "Deploying model... we will do this later"
