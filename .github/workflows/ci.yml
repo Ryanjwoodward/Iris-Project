@@ -20,9 +20,11 @@
           run: |
             pip install --upgrade pip
             pip install pandas scikit-learn
+            pip install seaborn
 
-        - name: Print Unit Test message
-          run: echo "We could run unit tests here, but for now we will not"
+        - name: Run Unit Tests
+          run:  |
+            python -m unittest discover -s . -p "*.py"
     
     deploy:
       runs-on: ubuntu-latest
