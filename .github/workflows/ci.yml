@@ -24,6 +24,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install pandas scikit-learn
+          pip install seaborn
 
       - name: Run Unit tests
         run: |
