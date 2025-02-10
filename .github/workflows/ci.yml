@@ -1,0 +1,36 @@
+  name: Iris Project CI/CD
+
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+      branches:
+        - main
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.8
+            
+        - name: Install dependencies
+          run: |
+            pip install --upgrade pip
+            pip install pandas scikit-learn
+
+        - name: Print Unit Test message
+          run: echo "We could run unit tests here, but for now we will not"
+    
+    deploy:
+      runs-on: ubuntu-latest
+      needs: test
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - name: Deploy to environment
+          run: |
+            echo "Could deploy a model somewhere if we wanted"
